@@ -1,0 +1,11 @@
+.spacer{
+	margin-top:40PX; 
+}
+
+.table tbody tr.success {
+	background-color: #4cae4c !important;
+}
+
+.table tbody tr.gris {
+	background-color: #8c8c8c!important;
+}

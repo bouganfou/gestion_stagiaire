@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="template">
+<head>
+	<meta charset="utf-8">
+	<title>Insert title here</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+	  th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+	  th:href="@{/css/style.css}"/>
+<body >
+<div layout:fragment="content">
+	<header>
+
+		<div class="navbar navbar-default">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/groupes}">groupes</a></li>
+					<li><a th:href="@{/modules}">modules</a></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/login/logout}" th:text="${#httpServletRequest.remoteUser}"></a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Le module</div>
+			<div class="panel-body">
+				<table class="table tabel-striped">
+		<tr>
+			<th>ID</th><th>intitule Groupe</th><th>niveau Module</th><th>Code Module</th><th>Edit</th>
+		</tr>
+		<tr th:each="e:${modules}">
+			<td th:text="${e.id}"></td>
+			<td th:text="${e.groupe.getIntitule()}"></td>
+			<td th:text="${e.module.getNiveau()}"></td>
+			<td th:text="${e.module.getCodeModule()}"></td>
+			<td>
+			<a th:href="@{'/editModule/'+${e.module.getIdModule()}}">edit</a>
+			</td>
+
+		</tr>
+		</table>
+			</div>
+			</div>
+		</div>
+		<div>
+			<ul  class="nav nav-pills">
+				<li th:class="${pageCourante==status.index}?'active':''" th:each="p,status:${pages}" >
+				<a th:href="@{/groupes(page=${status.index},size=5)}" th:text="${status.index}"></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</body>
+</html>

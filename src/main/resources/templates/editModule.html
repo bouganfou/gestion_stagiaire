@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="template">
+<head>
+<meta charset="utf-8">
+<title>Edit Module</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+	  th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+	  th:href="@{/css/style.css}"/>
+<body>
+<div layout:fragment="content">
+	<header>
+
+		<div class="navbar navbar-default">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/groupes}">groupes</a></li>
+					<li><a th:href="@{/seances}">seances</a></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/login/logout}" th:text="${#httpServletRequest.remoteUser}"></a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+		<div class="right">
+			<a th:href="@{'/seances/'+${module.idModule}}">Liste des  Seances</a>
+		</div>
+		<div class="panel panel-primary">
+			<div class="panel-heading">Edition de Module</div>
+			<div class="panel-body">
+				<div class="form-group">
+				<label class="control-label" for="id">ID</label>
+				<input class="form-control" disabled="true" th:value="${module.idModule}" name="id"/>
+			</div>
+				<div class="form-group">
+					<label class="control-label" for="codeModule">Code Module</label>
+					<input class="form-control" disabled="true" th:value="${module.codeModule}" name="codeModule"/>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="intitule">Intitule</label>
+					<input class="form-control" disabled="true" th:value="${module.intitule}" name="intitule"/>
+				</div>
+				<div class="form-group">
+				<label class="control-label" for="filiere">Filiere</label>
+				<input class="form-control" disabled="true" th:value="${module.filiere.getCode()}" name="filiere"/>
+			</div>
+				<div class="form-group">
+					<label class="control-label" for="niveau">Niveau</label>
+					<input class="form-control" disabled="true" th:value="${module.niveau}" name="niveau"/>
+				</div>
+
+
+	</div>
+</div>
+	</div>
+</div>
+</body>
+</html>

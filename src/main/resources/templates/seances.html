@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="template1" >
+<head>
+<meta charset="utf-8">
+<title>seances</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+	  th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" type="text/css" href="../static/css/style.css"
+	  th:href="@{/css/style.css}"/>
+<body>
+<div layout:fragment="content">
+	<header>
+
+		<div class="navbar navbar-default">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/groupes}">groupes</a></li>
+					<li><a th:href="@{/seances}">seances</a></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/login/logout}" th:text="${#httpServletRequest.remoteUser}"></a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Liste des sceances</div>
+			<div class="panel-body">
+				<table class="table tabel-striped">
+		<tr>
+			<th>num Seance</th><th>date Realisation</th><th>heure Debut</th><th>Heure Fin</th><th>absence</th>
+		</tr>
+		<tr th:each="e:${seances}" th:class="${e.module.getMasseHoraire()}>=90?'success':'gris'">
+			<td th:text="${e.numSeance}"></td>
+			<td th:text="${e.dateRealisation}"></td>
+			<td th:text="${e.heureDebut}"></td>
+			<td th:text="${e.HeureFin}"></td>
+			<td th:text="${e.absence}"></td>
+
+		</tr>
+		</table>
+			</div>
+			</div>
+		</div>
+		<div>
+			<ul  class="nav nav-pills">
+				<li th:class="${pageCourante==status.index}?'active':''" th:each="p,status:${pages}" >
+				<a th:href="@{/groupes(page=${status.index},size=5)}" th:text="${status.index}"></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</body>
+</html>
